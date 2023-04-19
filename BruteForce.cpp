@@ -5,10 +5,6 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
-using namespace std::chrono;
-
-#define filename "sample_input.csv"
 #define delimiter ','
 
 #define NUMBER 0
@@ -16,6 +12,13 @@ using namespace std::chrono;
 #define Y 2
 #define WIDTH 3
 #define HEIGHT 4
+
+const std::string inPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Input/";
+const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Output/Brute Force Algorithm Output/";
+const std::string analysisPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Analysis/Brute Force Analysis/";
+
+const int max_iter = 5000;
+const int step_size = 1;
 
 class Rectangle
 {
@@ -61,20 +64,20 @@ public:
     {
     }
 
-    string toString()
+    std::string toString()
     {
-        return "Rectangle " + to_string(number) + " with anchor point at (" + to_string(bottom_left.x) + ", " + to_string(bottom_left.y) + ") with width: " + to_string(width) + " and height: " + to_string(height);
+        return "Rectangle " + std::to_string(number) + " with anchor point at (" + std::to_string(bottom_left.x) + ", " + std::to_string(bottom_left.y) + ") with width: " + std::to_string(width) + " and height: " + std::to_string(height);
     }
 };
 
-vector<int> split(string s)
+std::vector<int> split(std::string s)
 {
     /*
     # Structure of input
     * Number,x,y,Width,Height
     */
 
-    vector<int> numbers;
+    std::vector<int> numbers;
 
     size_t pos = 0;
 
@@ -108,14 +111,14 @@ vector<int> split(string s)
     return numbers;
 }
 
-vector<Rectangle> rectangles;
-
-void getRectangles()
+std::vector<Rectangle> getRectangles(std::string filename)
 {
-    string headers;
+    std::vector<Rectangle> rectangles;
 
-    ifstream myFile(filename);
-    string s;
+    std::string headers;
+
+    std::ifstream myFile(filename);
+    std::string s;
 
     int count = 0;
 
@@ -127,7 +130,7 @@ void getRectangles()
         }
         else
         {
-            vector<int> numbers = split(s);
+            std::vector<int> numbers = split(s);
 
             int number = numbers[NUMBER];
             int x = numbers[X];
@@ -140,22 +143,26 @@ void getRectangles()
         }
         count++;
     }
+
+    myFile.close();
+
+    return rectangles;
 }
 
-void printRectangles()
+void printRectangles(std::vector<Rectangle> rectangles)
 {
     for (Rectangle rectangle : rectangles)
-        cout << rectangle.toString() << endl;
+        std::cout << rectangle.toString() << std::endl;
 }
 
-vector<string> getAdjacencies()
+std::vector<std::string> getAdjacencies(std::vector<Rectangle> rectangles)
 {
-    vector<string> output;
+    std::vector<std::string> output;
     for (Rectangle current : rectangles)
     {
-        string out = to_string(current.number) + ",";
+        std::string out = std::to_string(current.number) + ',';
 
-        string detail = "";
+        std::string detail = "";
         int count = 0;
 
         for (Rectangle other : rectangles)
@@ -196,14 +203,14 @@ vector<string> getAdjacencies()
 
                     if (adjacent)
                     {
-                        detail += "," + to_string(other.number) + "," + to_string(other.x1) + "," + to_string(yb) + "," + to_string(yt);
+                        detail += ',' + std::to_string(other.number) + ',' + std::to_string(other.x1) + ',' + std::to_string(yb) + ',' + std::to_string(yt);
                         count++;
                     }
                 }
             }
         }
 
-        out += to_string(count) + detail;
+        out += std::to_string(count) + detail;
         output.push_back(out);
     }
 
@@ -212,30 +219,47 @@ vector<string> getAdjacencies()
 
 int main()
 {
-    auto start = high_resolution_clock::now(); // * Starting the timer
+    auto programStart = std::chrono::high_resolution_clock::now();
 
-    getRectangles();
-    vector<string> output = getAdjacencies();
+    std::string analysisFilename = "BruteForceAnalysis.csv";
+    std::ofstream analysisFile(analysisPath + analysisFilename);
 
-    auto stop = high_resolution_clock::now(); // * Ending the timer
+    analysisFile << "Input,Time" << '\n';
 
-    /*
-    ! Outputting to file
-    */
-
-    ofstream fout("output.csv");
-
-    for (string out : output)
+    for (int numRectangles = 1; numRectangles <= max_iter; numRectangles += step_size)
     {
-        cout << out << endl;
-        fout << out << '\n';
+        std::string inFilename = "in" + std::to_string(numRectangles) + ".csv";
+        std::vector<Rectangle> rectangles = getRectangles(inPath + inFilename);
+
+        auto start = std::chrono::high_resolution_clock::now();
+
+        std::vector<std::string> output = getAdjacencies(rectangles);
+
+        auto stop = std::chrono::high_resolution_clock::now();
+
+        std::string outFilename = "out" + std::to_string(numRectangles) + ".csv";
+        std::ofstream outFile(outPath + outFilename);
+        for (std::string out : output)
+        {
+            // cout << out << endl;
+            outFile << out << '\n';
+        }
+
+        outFile.close();
+
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+        analysisFile << numRectangles << ',' << (float)(duration.count() / 1000) << '\n';
+        std::cout << numRectangles << " rectangles: " << (float)(duration.count() / 1000) << "ms" << std::endl;
     }
 
-    fout.close();
+    analysisFile.close();
 
-    auto duration = duration_cast<milliseconds>(stop - start);
+    auto programStop = std::chrono::high_resolution_clock::now();
 
-    cout << "\n--- " << duration.count() << " milliseconds ---" << endl;
+    auto programDuration = std::chrono::duration_cast<std::chrono::microseconds>(programStop - programStart);
+
+    std::cout << "Program took " << (float)(programDuration.count() / 1000) << " milliseconds" << std::endl;
 
     return 0;
 }

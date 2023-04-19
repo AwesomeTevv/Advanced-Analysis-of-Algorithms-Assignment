@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-const int max_iter = 5000;
+const int max_iter = 100;
 const int step_size = 1;
 
 const std::string path = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Input/";
@@ -73,8 +73,8 @@ int main()
 
             if ((x2 - x1) > 1000 && (y2 - y1) > 1000)
             {
-                int midX = (x2 - x1) / 2 + x1;
-                int midY = (y2 - y1) / 2 + y1;
+                int midX = (int)((x2 - x1) / 2) + x1;
+                int midY = (int)((y2 - y1) / 2) + y1;
 
                 int rx = randomIntInRange(midX - 400, midX + 400);
                 int ry = randomIntInRange(midY - 400, midY + 400);

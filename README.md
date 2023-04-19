@@ -1,2 +1,2 @@
-# Advanced-Analysis-of-Algorithms-Assignment
+# Advanced Analysis of Algorithms Assignment
 A repository for my 'Advanced Analysis of Algorithms' assignment.

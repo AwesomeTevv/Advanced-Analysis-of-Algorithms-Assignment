@@ -259,7 +259,8 @@ int main()
 
     auto programDuration = std::chrono::duration_cast<std::chrono::microseconds>(programStop - programStart);
 
-    std::cout << "Program took " << (float)(programDuration.count() / 1000) << " milliseconds" << std::endl;
+    std::cout << '\n'
+              << "--- Program took " << (float)(programDuration.count() / 1000) << " milliseconds ---" << std::endl;
 
     return 0;
 }

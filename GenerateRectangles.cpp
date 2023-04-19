@@ -71,7 +71,7 @@ int main()
             x2 = newRectangle.x2;
             y2 = newRectangle.y2;
 
-            if ((x2 - x1) > 1000 && (y2 - y1) > 1000)
+            if (((x2 - x1) > 1000) && ((y2 - y1) > 1000))
             {
                 int midX = (int)((x2 - x1) / 2) + x1;
                 int midY = (int)((y2 - y1) / 2) + y1;
@@ -91,14 +91,14 @@ int main()
             int randomRectangle = randomIntInRange(0, rectangles.size() - 1);
 
             Rectangle r = rectangles.at(randomRectangle);
-            rectangles.pop_back();
+            rectangles.erase(rectangles.begin() + randomRectangle);
 
             x1 = r.x1;
             y1 = r.y1;
             x2 = r.x2;
             y2 = r.y2;
 
-            if ((x2 - x1) > 1000 && (y2 - y1) > 1000)
+            if (((x2 - x1) > 1000) && ((y2 - y1) > 1000))
             {
                 int midX = (x2 - x1) / 2 + x1;
                 int midY = (y2 - y1) / 2 + y1;

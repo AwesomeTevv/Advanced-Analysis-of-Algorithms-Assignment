@@ -5,29 +5,45 @@
 #include <string>
 #include <sstream>
 
-#define delimiter ','
+#define delimiter ',' // The delimiter of the input files. By default is ','.
 
-#define NUMBER 0
-#define X 1
-#define Y 2
-#define WIDTH 3
-#define HEIGHT 4
+#define NUMBER 0 // The position in the array of the number of the rectangle.
+#define X 1      // The position in the array of the x-coordinate of the bottom-left corner of the rectangle.
+#define Y 2      // The position in the array of the y-coordinate of the bottom-left corner of the rectangle.
+#define WIDTH 3  // The position in the array of the width of the rectangle.
+#define HEIGHT 4 // The position in the array of the height of the rectangle.
 
+// Path to the directory where the input files are found.
+// Change as needed.
 const std::string inPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Input/";
+
+// Path to the directory where the output files are to be saved.
+// Change as needed.
 const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Output/Brute Force Algorithm Output/";
+
+// Path to the directory where the analysis file is to be saved.
+// Change as needed.
 const std::string analysisPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Analysis/Brute Force Analysis/";
 
-const int max_iter = 5000;
-const int step_size = 1;
+const int max_iter = 5000; // The maximum amount of iterations the program will make. Change as needed.
+const int step_size = 1;   // The step size between iterations. Change as needed.
 
+/*
+    Custom Rectangle class.
+    Stored all the necessary details of the rectangle.
+*/
 class Rectangle
 {
 public:
+    /*
+        Custom Point class.
+        Stores the x and y coordinate of a single point.
+    */
     class Point
     {
     public:
-        int x;
-        int y;
+        int x; // The x coordinate of the point.
+        int y; // The y coordinate of the point.
 
         Point() {}
 
@@ -37,17 +53,17 @@ public:
         }
     };
 
-    int number;
-    int x1;
-    int y1;
-    int x2;
-    int y2;
-    int width;
-    int height;
-    Point bottom_left;
-    Point bottom_right;
-    Point top_left;
-    Point top_right;
+    int number;         // The number of the rectangle.
+    int x1;             // The x-coordinate of the bottom-left corner of the rectangle.
+    int y1;             // The y-coordinate of the bottom-left corner of the rectangle.
+    int x2;             // The x-coordinate of the top-right corner of the rectangle.
+    int y2;             // The y-coordinate of the top-right corner of the rectangle.
+    int width;          // The width of the rectangle.
+    int height;         // The height of the rectangle.
+    Point bottom_left;  // The bottom-left point (coordinates) of the rectangle.
+    Point bottom_right; // The bottom-right point (coordinates) of the rectangle.
+    Point top_left;     // The top-left point (coordinates) of the rectangle.
+    Point top_right;    // The top-right point (coordinates) of the rectangle.
 
     Rectangle(int number, int x1, int y1, int x2, int y2)
         : number(number),
@@ -64,17 +80,24 @@ public:
     {
     }
 
+    /*
+        Returns a string with all the details of the rectangle.
+    */
     std::string toString()
     {
         return "Rectangle " + std::to_string(number) + " with anchor point at (" + std::to_string(bottom_left.x) + ", " + std::to_string(bottom_left.y) + ") with width: " + std::to_string(width) + " and height: " + std::to_string(height);
     }
 };
 
+/*
+    Function that splits a given string into a vector of integers, by a given delimiter.
+    By default, the delimiter is ','
+*/
 std::vector<int> split(std::string s)
 {
     /*
-    # Structure of input
-    * Number,x,y,Width,Height
+    Structure of input
+    Number,x,y,Width,Height
     */
 
     std::vector<int> numbers;
@@ -111,6 +134,10 @@ std::vector<int> split(std::string s)
     return numbers;
 }
 
+/*
+    Function that reads the input rectangles from a given input file
+    and stores the rectangles in a vector of rectangles.
+*/
 std::vector<Rectangle> getRectangles(std::string filename)
 {
     std::vector<Rectangle> rectangles;
@@ -149,12 +176,21 @@ std::vector<Rectangle> getRectangles(std::string filename)
     return rectangles;
 }
 
+/*
+    Function that prints to the console every Rectangle
+    in a given vector of Rectangles.
+*/
 void printRectangles(std::vector<Rectangle> rectangles)
 {
     for (Rectangle rectangle : rectangles)
         std::cout << rectangle.toString() << std::endl;
 }
 
+/*
+    A function that, when given a vector of Rectangles, will determine
+    the adjacencies, to the right, of every Rectangle and will return
+    an adjacency list.
+*/
 std::vector<std::string> getAdjacencies(std::vector<Rectangle> rectangles)
 {
     std::vector<std::string> output;

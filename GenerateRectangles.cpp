@@ -4,7 +4,7 @@
 #include <fstream>
 #include <string>
 
-const int max_iter = 100;
+const int max_iter = 5000;
 const int step_size = 1;
 
 const std::string path = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Input/";

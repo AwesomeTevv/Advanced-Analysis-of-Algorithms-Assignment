@@ -61,6 +61,10 @@ int main()
 
         rectangles.push_back(outerRectangle);
 
+        /*
+        Breaking up our initial rectangle
+        into four smaller rectangles
+        */
         for (int k = 0; k < 5; k++)
         {
             Rectangle newRectangle = rectangles.back();
@@ -86,6 +90,10 @@ int main()
             }
         }
 
+        /*
+        Choosing a random rectangle and breaking it up into
+        smaller rectangles
+        */
         while (rectangles.size() <= numRectangles)
         {
             int randomRectangle = randomIntInRange(0, rectangles.size() - 1);

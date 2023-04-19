@@ -50,10 +50,10 @@ int main()
         std::cout << "Generating a list with " << numRectangles << " rectangles" << std::endl;
 
         // Defining our rectangle
-        int x1 = 0;     // x-value for the bottom-left corner of the rectangle
-        int y1 = 0;     // y-value for the bottom-left corner of the rectangle
-        int x2 = 20000; // x-value for the top-right corner of the rectangle
-        int y2 = 20000; // y-value for the top-right corner of the rectangle
+        int x1 = 0;      // x-value for the bottom-left corner of the rectangle
+        int y1 = 0;      // y-value for the bottom-left corner of the rectangle
+        int x2 = 100000; // x-value for the top-right corner of the rectangle
+        int y2 = 100000; // y-value for the top-right corner of the rectangle
 
         std::vector<Rectangle> rectangles;
 

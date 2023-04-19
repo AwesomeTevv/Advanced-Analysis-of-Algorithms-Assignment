@@ -90,7 +90,7 @@ int main()
         {
             int randomRectangle = randomIntInRange(0, rectangles.size() - 1);
 
-            Rectangle r = rectangles.at(randomRectangle);
+            Rectangle r = rectangles[randomRectangle];
             rectangles.erase(rectangles.begin() + randomRectangle);
 
             x1 = r.x1;

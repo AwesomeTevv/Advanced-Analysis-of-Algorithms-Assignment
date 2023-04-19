@@ -3,6 +3,7 @@
 #include <random>
 #include <fstream>
 #include <string>
+#include <chrono>
 
 const int max_iter = 5000;
 const int step_size = 1;
@@ -45,6 +46,8 @@ public:
 
 int main()
 {
+    auto programStart = std::chrono::high_resolution_clock::now();
+
     for (int numRectangles = 1; numRectangles <= max_iter; numRectangles += step_size)
     {
         std::cout << "Generating a list with " << numRectangles << " rectangles" << std::endl;
@@ -151,6 +154,13 @@ int main()
 
         outputFile.close();
     }
+
+    auto programStop = std::chrono::high_resolution_clock::now();
+
+    auto programDuration = std::chrono::duration_cast<std::chrono::microseconds>(programStop - programStart);
+
+    std::cout << '\n'
+              << "--- Program took " << (float)(programDuration.count() / 1000) << " milliseconds ---" << std::endl;
 
     return 0;
 }

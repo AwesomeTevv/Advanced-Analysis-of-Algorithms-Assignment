@@ -15,18 +15,18 @@
 
 // Path to the directory where the input files are found.
 // Change as needed.
-const std::string inPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Input/";
+const std::string inPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Assignment/Input/";
 
 // Path to the directory where the output files are to be saved.
 // Change as needed.
-const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Output/Brute Force Algorithm Output/";
+const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Assignment/Output/Brute Force Algorithm Output/";
 
 // Path to the directory where the analysis file is to be saved.
 // Change as needed.
 const std::string analysisPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Analysis/Brute Force Analysis/";
 
-const int max_iter = 5000; // The maximum amount of iterations the program will make. Change as needed.
-const int step_size = 1;   // The step size between iterations. Change as needed.
+const int max_iter = 18000; // The maximum amount of iterations the program will make. Change as needed.
+const int step_size = 1;    // The step size between iterations. Change as needed.
 
 /*
     Custom Rectangle class.

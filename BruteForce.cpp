@@ -285,8 +285,8 @@ int main()
 
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
-        analysisFile << numRectangles << ',' << (float)(duration.count() / 1000) << '\n';
-        std::cout << numRectangles << " rectangles: " << (float)(duration.count() / 1000) << "ms" << std::endl;
+        analysisFile << numRectangles << ',' << duration.count() / 1000.0 << '\n';
+        std::cout << numRectangles << " rectangles: " << duration.count() / 1000.0 << "ms" << std::endl;
     }
 
     analysisFile.close();

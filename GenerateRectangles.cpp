@@ -5,9 +5,10 @@
 #include <string>
 #include <chrono>
 
-const int max_iter = 20000;
-const int step_size = 1;
+const int max_iter = 20000; // Defines the maximum number of rectangles we want to generate.
+const int step_size = 1;    // Defines the step size between iterations. In other words, the difference in the number of rectangles between iterations.
 
+// Path to where, on your local machine, you want to store the generated input .csv files.
 const std::string path = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Input/";
 
 /*
@@ -46,7 +47,7 @@ public:
 
 int main()
 {
-    auto programStart = std::chrono::high_resolution_clock::now();
+    auto programStart = std::chrono::high_resolution_clock::now(); // Starting the timer that tracks the runtime of the whole program
 
     for (int numRectangles = 1; numRectangles <= max_iter; numRectangles += step_size)
     {
@@ -60,7 +61,7 @@ int main()
 
         std::vector<Rectangle> rectangles;
 
-        Rectangle outerRectangle = Rectangle(x1, y1, x2, y2);
+        Rectangle outerRectangle = Rectangle(x1, y1, x2, y2); // Defining our outer, initial rectangle.
 
         rectangles.push_back(outerRectangle);
 
@@ -155,12 +156,12 @@ int main()
         outputFile.close();
     }
 
-    auto programStop = std::chrono::high_resolution_clock::now();
+    auto programStop = std::chrono::high_resolution_clock::now(); // Stopping the timer that tracks the runtime of the whole program
 
-    auto programDuration = std::chrono::duration_cast<std::chrono::microseconds>(programStop - programStart);
+    auto programDuration = std::chrono::duration_cast<std::chrono::seconds>(programStop - programStart); // Getting the duration of the program in seconds
 
     std::cout << '\n'
-              << "--- Program took " << (float)(programDuration.count() / 1000) << " milliseconds ---" << std::endl;
+              << "--- Program took " << programDuration.count() << " seconds ---" << std::endl;
 
     return 0;
 }

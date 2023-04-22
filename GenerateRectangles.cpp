@@ -5,11 +5,23 @@
 #include <string>
 #include <chrono>
 
+/*
+Author: Tevlen Naidoo (2429493) - @AwesomeTevv
+*/
+
+// ----------------------------------------------------
+// Variable To Change
+// ----------------------------------------------------
+
 const int max_iter = 20000; // Defines the maximum number of rectangles we want to generate.
 const int step_size = 1;    // Defines the step size between iterations. In other words, the difference in the number of rectangles between iterations.
 
 // Path to where, on your local machine, you want to store the generated input .csv files.
 const std::string path = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Input/";
+
+// ----------------------------------------------------
+// Everything from now on should remain unchanged
+// ----------------------------------------------------
 
 /*
 Function that takes in a minimum number
@@ -158,7 +170,7 @@ int main()
 
     auto programStop = std::chrono::high_resolution_clock::now(); // Stopping the timer that tracks the runtime of the whole program
 
-    auto programDuration = std::chrono::duration_cast<std::chrono::seconds>(programStop - programStart); // Getting the duration of the program in seconds
+    auto programDuration = std::chrono::duration_cast<std::chrono::seconds>(programStop - programStart); // Getting the duration of the program (in seconds)
 
     std::cout << '\n'
               << "--- Program took " << programDuration.count() << " seconds ---" << std::endl;

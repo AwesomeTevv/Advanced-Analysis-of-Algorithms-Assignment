@@ -244,13 +244,13 @@ std::vector<std::string> getAdjacencies(std::vector<Rectangle> rectangles)
                         yb = current.bottom_right.y;
                         adjacent = true;
                     }
-                    else if (current.bottom_right.y <= other.bottom_left.y && other.bottom_left.y <= current.top_right.y)
+                    else if (current.bottom_right.y < other.bottom_left.y && other.bottom_left.y < current.top_right.y)
                     {
                         yt = current.top_right.y;
                         yb = other.y1;
                         adjacent = true;
                     }
-                    else if (current.bottom_right.y <= other.top_left.y && other.top_left.y <= current.top_right.y)
+                    else if (current.bottom_right.y < other.top_left.y && other.top_left.y < current.top_right.y)
                     {
                         yt = other.top_left.y;
                         yb = current.bottom_right.y;

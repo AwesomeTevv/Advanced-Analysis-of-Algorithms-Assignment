@@ -52,9 +52,11 @@ g++ -o Brute_Force BruteForce.cpp
 
 This command compiles the `C++` code into an executable program.
 
-Run this executable once you are ready to start generating the input .csv files.
+Run this executable once you are ready to start generating the output .csv files, and the analysis .csv file.
 This can be done in Terminal by typing:
 
 ```Terminal
 ./Brute_Force
 ```
+
+Once you have the input, output, and analysis files, you are equipped with all the necessary data for this experiment.

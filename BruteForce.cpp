@@ -5,6 +5,14 @@
 #include <string>
 #include <sstream>
 
+/*
+Author: Tevlen Naidoo (2429493) - @AwesomeTevv
+*/
+
+// ----------------------------------------------------
+// Defining constants for convenience and clarity
+// ----------------------------------------------------
+
 #define delimiter ',' // The delimiter of the input files. By default is ','.
 
 #define NUMBER 0 // The position in the array of the number of the rectangle.
@@ -12,6 +20,10 @@
 #define Y 2      // The position in the array of the y-coordinate of the bottom-left corner of the rectangle.
 #define WIDTH 3  // The position in the array of the width of the rectangle.
 #define HEIGHT 4 // The position in the array of the height of the rectangle.
+
+// ----------------------------------------------------
+// Variable To Change
+// ----------------------------------------------------
 
 // Path to the directory where the input files are found.
 // Change as needed.
@@ -21,12 +33,20 @@ const std::string inPath = "C:/Users/tevle/Desktop/University/Third Year/Advance
 // Change as needed.
 const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Assignment/Output/Brute Force Algorithm Output/";
 
+// Name of the generated Analysis .csv file.
+// Change as needed.
+const std::string analysisFilename = "BruteForceAnalysis.csv";
+
 // Path to the directory where the analysis file is to be saved.
 // Change as needed.
 const std::string analysisPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Advanced-Analysis-of-Algorithms-Assignment/Analysis/Brute Force Analysis/";
 
 const int max_iter = 18000; // The maximum amount of iterations the program will make. Change as needed.
 const int step_size = 1;    // The step size between iterations. Change as needed.
+
+// ----------------------------------------------------
+// Everything from now on should remain unchanged
+// ----------------------------------------------------
 
 /*
     Custom Rectangle class.
@@ -144,7 +164,7 @@ std::vector<Rectangle> getRectangles(std::string filename)
 
     std::string headers;
 
-    std::ifstream myFile(filename);
+    std::ifstream myFile(filename); // The input data .csv file
     std::string s;
 
     int count = 0;
@@ -255,48 +275,47 @@ std::vector<std::string> getAdjacencies(std::vector<Rectangle> rectangles)
 
 int main()
 {
-    auto programStart = std::chrono::high_resolution_clock::now();
+    auto programStart = std::chrono::high_resolution_clock::now(); // Starting the timer that tracks the runtime of the whole program
 
-    std::string analysisFilename = "BruteForceAnalysis.csv";
-    std::ofstream analysisFile(analysisPath + analysisFilename);
+    std::ofstream analysisFile(analysisPath + analysisFilename); // The Analysis file
 
     analysisFile << "Input,Time" << '\n';
 
     for (int numRectangles = 1; numRectangles <= max_iter; numRectangles += step_size)
     {
-        std::string inFilename = "in" + std::to_string(numRectangles) + ".csv";
+        std::string inFilename = "in" + std::to_string(numRectangles) + ".csv"; // The name of the input file
         std::vector<Rectangle> rectangles = getRectangles(inPath + inFilename);
 
-        auto start = std::chrono::high_resolution_clock::now();
+        auto start = std::chrono::high_resolution_clock::now(); // Starting the timer that tracks the runtime of the brute force program
 
         std::vector<std::string> output = getAdjacencies(rectangles);
 
-        auto stop = std::chrono::high_resolution_clock::now();
+        auto stop = std::chrono::high_resolution_clock::now(); // Stopping the timer that tracks the runtime of the brute force program
 
         std::string outFilename = "out" + std::to_string(numRectangles) + ".csv";
-        std::ofstream outFile(outPath + outFilename);
+        std::ofstream outFile(outPath + outFilename); // The generated output file
         for (std::string out : output)
         {
             // cout << out << endl;
-            outFile << out << '\n';
+            outFile << out << '\n'; // Adding the output to the output file
         }
 
         outFile.close();
 
-        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start); // Getting the duration of the brute force program (in microseconds)
 
-        analysisFile << numRectangles << ',' << duration.count() / 1000.0 << '\n';
+        analysisFile << numRectangles << ',' << duration.count() / 1000.0 << '\n'; // Adding the data to the analysis file
         std::cout << numRectangles << " rectangles: " << duration.count() / 1000.0 << "ms" << std::endl;
     }
 
     analysisFile.close();
 
-    auto programStop = std::chrono::high_resolution_clock::now();
+    auto programStop = std::chrono::high_resolution_clock::now(); // Starting the timer that tracks the runtime of the whole program
 
-    auto programDuration = std::chrono::duration_cast<std::chrono::microseconds>(programStop - programStart);
+    auto programDuration = std::chrono::duration_cast<std::chrono::seconds>(programStop - programStart); // Getting the duration of the whole program (in seconds)
 
     std::cout << '\n'
-              << "--- Program took " << (float)(programDuration.count() / 1000) << " milliseconds ---" << std::endl;
+              << "--- Program took " << programDuration.count() << " seconds ---" << std::endl;
 
     return 0;
 }

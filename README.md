@@ -27,3 +27,8 @@ This can be done in Terminal by typing:
 ```Terminal
 ./Generate_Rectangles
 ```
+
+### Generating the Output
+
+Included in this .zip file is a `C++` file named `BruteForce.cpp`.
+Inside this file, you only need to edit three variables in order to run this experiment for yourself.

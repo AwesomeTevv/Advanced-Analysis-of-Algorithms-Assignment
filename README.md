@@ -2,6 +2,8 @@
 
 By Tevlen Naidoo (2429493)
 
+For an easier experience, head to this [GitHub repository](https://github.com/AwesomeTevv/Advanced-Analysis-of-Algorithms-Assignment).
+
 ## Phase 1 Instructions
 
 ### Generating the Input

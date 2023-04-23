@@ -1,5 +1,7 @@
 # Advanced Analysis of Algorithms Assignment
 
+By Tevlen Naidoo (2429493)
+
 ## Phase 1 Instructions
 
 ### Generating the Input

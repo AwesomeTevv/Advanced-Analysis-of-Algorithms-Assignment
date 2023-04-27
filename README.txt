@@ -2,7 +2,7 @@ Advanced Analysis of Algorithms Assignment
 
 By Tevlen Naidoo (2429493)
 
-For an easier experience, head to this [GitHub repository](https://github.com/AwesomeTevv/Advanced-Analysis-of-Algorithms-Assignment).
+For an easier experience, head to this GitHub repository: https://github.com/AwesomeTevv/Advanced-Analysis-of-Algorithms-Assignment.
 
 ----------------------------
    Phase 1 Instructions
@@ -19,7 +19,7 @@ These variables are:
 - step_size: Defines the step size between iterations. In other words, the difference in the number of rectangles between iterations.
 - path: Path to where, on your local machine, you want to store the generated input .csv files.
 
-Once you have changed these variables to reflect you preferences, traverse to the directory where the `GenerateRectangles.cpp` file is stored, open that directory in Terminal, and run the following terminal command:
+Once you have changed these variables to reflect you preferences, traverse to the directory where the GenerateRectangles.cpp file is stored, open that directory in Terminal, and run the following terminal command:
 
 g++ -o Generate_Rectangles GenerateRectangles.cpp
 
@@ -48,7 +48,7 @@ These variables are:
 
 > Make sure max_iter is equal to or less than the total number of input files.
 
-Once you have changed these variables to reflect you preferences, traverse to the directory where the `BruteForce.cpp` file is stored, open that directory in Terminal, and run the following terminal command:
+Once you have changed these variables to reflect you preferences, traverse to the directory where the BruteForce.cpp file is stored, open that directory in Terminal, and run the following terminal command:
 
 g++ -o Brute_Force BruteForce.cpp
 

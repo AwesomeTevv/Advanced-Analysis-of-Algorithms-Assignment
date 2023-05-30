@@ -1,10 +1,9 @@
-#include <vector>    // std::vector
-#include <iostream>  // std::cout
-#include <fstream>   // std::ifstream
-#include <chrono>    // std::chrono
-#include <algorithm> // std::sort
-#include <set>       // std::set
-#include <bits/stdc++.h>
+#include <vector>   // std::vector
+#include <iostream> // std::cout
+#include <fstream>  // std::ifstream
+#include <chrono>   // std::chrono
+// #include <algorithm> // std::sort
+#include <set> // std::set
 
 /*
 Author: Tevlen Naidoo (2429493) - @AwesomeTevv
@@ -32,11 +31,11 @@ const std::string inPath = "C:/Users/tevle/Desktop/University/Third Year/Advance
 
 // Path to the directory where the output files are to be saved.
 // Change as needed.
-const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Assignment/Output/Improved Method Output/Average/";
+const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Assignment/Output/Improved Method Output/Average2/";
 
 // Name of the generated Analysis .csv file.
 // Change as needed.
-const std::string analysisFilename = "AverageCase.csv";
+const std::string analysisFilename = "AverageCase2.csv";
 
 // Path to the directory where the analysis file is to be saved.
 // Change as needed.
@@ -148,9 +147,15 @@ public:
     {
     }
 
-    bool operator<(const Rectangle &b) const
+    bool operator<(const Rectangle &r) const
     {
-        return this->number < b.number;
+        // return this->number < r.number;
+        if (this->x1 != r.x1)
+            return this->x1 < r.x1;
+        else
+        {
+            return this->y1 < r.y1;
+        }
     }
 
     /*
@@ -342,7 +347,8 @@ void printCandidates(std::set<Rectangle> candidates)
 */
 std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
 {
-    std::vector<Event> events; // Stores a list of all the Events
+    // std::vector<Event> events; // Stores a list of all the Events
+    std::set<Event> events;
 
     for (Rectangle rectangle : rectangles)
     {
@@ -350,28 +356,32 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
         Event e2 = Event(rectangle, rectangle.bottom_right, BottomRight);
         Event e3 = Event(rectangle, rectangle.top_right, TopRight);
         Event e4 = Event(rectangle, rectangle.top_left, TopLeft);
-        events.push_back(e1);
-        events.push_back(e2);
-        events.push_back(e3);
-        events.push_back(e4);
+        // events.push_back(e1);
+        // events.push_back(e2);
+        // events.push_back(e3);
+        // events.push_back(e4);
+        events.insert(e1);
+        events.insert(e2);
+        events.insert(e3);
+        events.insert(e4);
     }
 
     /*
         Ordering the events
     */
-    std::sort(events.begin(), events.end(), [](Event a, Event b)
-              {
-        if (a.p.x != b.p.x){
-            return a.p.x < b.p.x;
-        }
-        else{
-            if (a.p.y != b.p.y){
-                return a.p.y < b.p.y;
-            }
-            else{
-                return a.type < b.type;
-            }
-        } });
+    // std::sort(events.begin(), events.end(), [](Event a, Event b)
+    //           {
+    //     if (a.p.x != b.p.x){
+    //         return a.p.x < b.p.x;
+    //     }
+    //     else{
+    //         if (a.p.y != b.p.y){
+    //             return a.p.y < b.p.y;
+    //         }
+    //         else{
+    //             return a.type < b.type;
+    //         }
+    //     } });
 
     // std::cout << "Event Schedule:" << std::endl;
     // printEvents(events);
@@ -379,19 +389,22 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
 
     std::set<Rectangle> candidates;
 
-    for (Event event : events)
+    std::set<Event>::iterator e;
+    for (e = events.begin(); e != events.end(); e++)
     {
+        Event event = *e;
         if (event.type == BottomLeft)
             candidates.insert(event.r);
         else if (event.type == TopLeft)
             candidates.erase(event.r);
         else if (event.type == BottomRight || event.type == TopRight)
         {
-            auto itr = candidates.begin();
-            while (itr != candidates.end())
+            // auto itr = candidates.begin();
+            std::set<Rectangle>::iterator candidate;
+            for (candidate = candidates.begin(); candidate != candidates.end(); candidate++)
             {
                 Rectangle current = event.r;
-                Rectangle other = *itr;
+                Rectangle other = *candidate;
 
                 bool adjacent = false;
                 int yt = 0, yb = 0;
@@ -429,7 +442,6 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
                     Rectangle::Details details = Rectangle::Details(other.number, other.x1, yt, yb);
                     rectangles[event.r.number].adjacencies.insert(details);
                 }
-                itr++;
             }
         }
     }
@@ -482,7 +494,6 @@ int main()
 
         auto start = std::chrono::high_resolution_clock::now(); // Starting the timer that tracks the runtime of the brute force program
 
-        std::sort(rectangles.begin(), rectangles.end(), cmp); // Sorting the list of rectangles
         std::vector<std::string> output = ImprovedMethod(rectangles);
 
         auto stop = std::chrono::high_resolution_clock::now(); // Stopping the timer that tracks the runtime of the brute force program

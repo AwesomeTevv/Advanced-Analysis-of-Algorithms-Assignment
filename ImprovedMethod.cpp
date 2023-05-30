@@ -2,8 +2,7 @@
 #include <iostream> // std::cout
 #include <fstream>  // std::ifstream
 #include <chrono>   // std::chrono
-// #include <algorithm> // std::sort
-#include <set> // std::set
+#include <set>      // std::set
 
 /*
 Author: Tevlen Naidoo (2429493) - @AwesomeTevv
@@ -99,11 +98,6 @@ public:
               yb(yb)
         {
         }
-
-        // bool operator==(const Details &d) const
-        // {
-        //     return this->rectangleNumber == d.rectangleNumber;
-        // }
 
         bool operator<(const Details &d) const
         {
@@ -297,49 +291,6 @@ std::vector<Rectangle> getRectangles(std::string filename)
 }
 
 /*
-    Function that prints to the console every Rectangle
-    in a given vector of Rectangles.
-*/
-void printRectangles(std::vector<Rectangle> rectangles)
-{
-    for (Rectangle rectangle : rectangles)
-        std::cout << rectangle.toString() << std::endl;
-}
-
-/*
-    Function that prints to the console every Event
-    in a given vector of Events.
-*/
-void printEvents(std::vector<Event> events)
-{
-    std::cout << "Number of events: " << events.size() << std::endl;
-    for (auto event : events)
-    {
-        std::cout << types[event.type] << " of Rectangle " << event.r.number << " at Point " << event.p.toString() << std::endl;
-    }
-    std::cout << std::endl;
-}
-
-/*
-    Function that prints to the console every Candidate
-    in a given set of Rectangles.
-*/
-void printCandidates(std::set<Rectangle> candidates)
-{
-    if (candidates.empty())
-        std::cout << "Candidates list is empty" << std::endl;
-    else
-    {
-        std::string out = "";
-        for (auto it = candidates.begin(); it != candidates.end(); it++)
-        {
-            out += std::to_string(it->number) + '\t';
-        }
-        std::cout << out << std::endl;
-    }
-}
-
-/*
     Function that performs a line sweeping on the list of rectangles
     and returns the adjacencies of the rectangles
 */
@@ -350,38 +301,9 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
 
     for (Rectangle rectangle : rectangles)
     {
-        // Event e1 = Event(rectangle, rectangle.bottom_left, BottomLeft);
-        // Event e2 = Event(rectangle, rectangle.bottom_right, BottomRight);
-        // Event e3 = Event(rectangle, rectangle.top_right, TopRight);
-        // Event e4 = Event(rectangle, rectangle.top_left, TopLeft);
-        // events.push_back(e1);
-        // events.push_back(e2);
-        // events.push_back(e3);
-        // events.push_back(e4);
         events.insert(Event(rectangle, rectangle.bottom_left, BottomLeft));
         events.insert(Event(rectangle, rectangle.top_right, TopRight));
     }
-
-    /*
-        Ordering the events
-    */
-    // std::sort(events.begin(), events.end(), [](Event a, Event b)
-    //           {
-    //     if (a.p.x != b.p.x){
-    //         return a.p.x < b.p.x;
-    //     }
-    //     else{
-    //         if (a.p.y != b.p.y){
-    //             return a.p.y < b.p.y;
-    //         }
-    //         else{
-    //             return a.type < b.type;
-    //         }
-    //     } });
-
-    // std::cout << "Event Schedule:" << std::endl;
-    // printEvents(events);
-    // std::cout << std::endl;
 
     std::set<Rectangle> candidates;
 
@@ -394,7 +316,7 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
         else
         {
             candidates.erase(event.r);
-            // auto itr = candidates.begin();
+
             std::set<Rectangle>::iterator candidate;
             for (candidate = candidates.begin(); candidate != candidates.end(); candidate++)
             {
@@ -457,21 +379,6 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
     }
 
     return output;
-}
-
-/*
-    Ordering structure for comparing rectangles
-*/
-bool cmp(Rectangle a, Rectangle b)
-{
-    if (a.x1 != b.x1)
-    {
-        return a.x1 < b.x1;
-    }
-    else
-    {
-        return a.y1 < b.y1;
-    }
 }
 
 int main()

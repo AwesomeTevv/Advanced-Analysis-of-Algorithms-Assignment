@@ -48,7 +48,7 @@ const int step_size = 1;    // The step size between iterations. Change as neede
 // Everything from now on should remain unchanged
 // ----------------------------------------------------
 
-std::string types[4] = {"Bottom Left", "Bottom Right", "Top Right", "Top Left"};
+std::string types[4] = {"Bottom Left", "Top Right"};
 
 /*
     Custom Rectangle class.
@@ -170,9 +170,7 @@ public:
 enum
 {
     BottomLeft,
-    BottomRight,
-    TopRight,
-    TopLeft
+    TopRight
 };
 
 /*
@@ -352,18 +350,16 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
 
     for (Rectangle rectangle : rectangles)
     {
-        Event e1 = Event(rectangle, rectangle.bottom_left, BottomLeft);
-        Event e2 = Event(rectangle, rectangle.bottom_right, BottomRight);
-        Event e3 = Event(rectangle, rectangle.top_right, TopRight);
-        Event e4 = Event(rectangle, rectangle.top_left, TopLeft);
+        // Event e1 = Event(rectangle, rectangle.bottom_left, BottomLeft);
+        // Event e2 = Event(rectangle, rectangle.bottom_right, BottomRight);
+        // Event e3 = Event(rectangle, rectangle.top_right, TopRight);
+        // Event e4 = Event(rectangle, rectangle.top_left, TopLeft);
         // events.push_back(e1);
         // events.push_back(e2);
         // events.push_back(e3);
         // events.push_back(e4);
-        events.insert(e1);
-        events.insert(e2);
-        events.insert(e3);
-        events.insert(e4);
+        events.insert(Event(rectangle, rectangle.bottom_left, BottomLeft));
+        events.insert(Event(rectangle, rectangle.top_right, TopRight));
     }
 
     /*
@@ -395,10 +391,9 @@ std::vector<std::string> ImprovedMethod(std::vector<Rectangle> &rectangles)
         Event event = *e;
         if (event.type == BottomLeft)
             candidates.insert(event.r);
-        else if (event.type == TopLeft)
-            candidates.erase(event.r);
-        else if (event.type == BottomRight || event.type == TopRight)
+        else
         {
+            candidates.erase(event.r);
             // auto itr = candidates.begin();
             std::set<Rectangle>::iterator candidate;
             for (candidate = candidates.begin(); candidate != candidates.end(); candidate++)

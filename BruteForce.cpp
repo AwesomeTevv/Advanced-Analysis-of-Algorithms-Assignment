@@ -16,10 +16,10 @@ Author: Tevlen Naidoo (2429493) - @AwesomeTevv
 #define delimiter ',' // The delimiter of the input files. By default is ','.
 
 #define NUMBER 0 // The position in the array of the number of the rectangle.
-#define X 1      // The position in the array of the x-coordinate of the bottom-left corner of the rectangle.
-#define Y 2      // The position in the array of the y-coordinate of the bottom-left corner of the rectangle.
-#define WIDTH 3  // The position in the array of the width of the rectangle.
-#define HEIGHT 4 // The position in the array of the height of the rectangle.
+#define X1 1     // The position in the array of the x-coordinate of the bottom-left corner of the rectangle.
+#define Y1 2     // The position in the array of the y-coordinate of the bottom-left corner of the rectangle.
+#define X2 3     // The position in the array of the x-coordinate of the top-right corner of the rectangle.
+#define Y2 4     // The position in the array of the y-coordinate of the top-right corner of the rectangle.
 
 // ----------------------------------------------------
 // Variable To Change
@@ -117,7 +117,7 @@ std::vector<int> split(std::string s)
 {
     /*
     Structure of input
-    Number,x,y,Width,Height
+    Number,x1,y1,x2,y2
     */
 
     std::vector<int> numbers;
@@ -130,26 +130,26 @@ std::vector<int> split(std::string s)
     numbers.push_back(number);
     s.erase(0, pos + 1);
 
-    int x;
+    int x1;
     pos = s.find(delimiter);
-    x = stoi(s.substr(0, pos));
-    numbers.push_back(x);
+    x1 = stoi(s.substr(0, pos));
+    numbers.push_back(x1);
     s.erase(0, pos + 1);
 
-    int y;
+    int y1;
     pos = s.find(delimiter);
-    y = stoi(s.substr(0, pos));
-    numbers.push_back(y);
+    y1 = stoi(s.substr(0, pos));
+    numbers.push_back(y1);
     s.erase(0, pos + 1);
 
-    int width;
+    int x2;
     pos = s.find(delimiter);
-    width = stoi(s.substr(0, pos));
-    numbers.push_back(width);
+    x2 = stoi(s.substr(0, pos));
+    numbers.push_back(x2);
     s.erase(0, pos + 1);
 
-    int height = stoi(s);
-    numbers.push_back(height);
+    int y2 = stoi(s);
+    numbers.push_back(y2);
 
     return numbers;
 }
@@ -180,12 +180,12 @@ std::vector<Rectangle> getRectangles(std::string filename)
             std::vector<int> numbers = split(s);
 
             int number = numbers[NUMBER];
-            int x = numbers[X];
-            int y = numbers[Y];
-            int width = numbers[WIDTH];
-            int height = numbers[HEIGHT];
+            int x1 = numbers[X1];
+            int y1 = numbers[Y1];
+            int x2 = numbers[X2];
+            int y2 = numbers[Y2];
 
-            Rectangle rectangle = Rectangle(number, x, y, width, height);
+            Rectangle rectangle = Rectangle(number, x1, y1, x2, y2);
             rectangles.push_back(rectangle);
         }
         count++;

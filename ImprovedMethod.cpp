@@ -30,11 +30,11 @@ const std::string inPath = "C:/Users/tevle/Desktop/University/Third Year/Advance
 
 // Path to the directory where the output files are to be saved.
 // Change as needed.
-const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Assignment/Output/Improved Method Output/Average2/";
+const std::string outPath = "C:/Users/tevle/Desktop/University/Third Year/Advanced Analysis of Algorithms/Assignment/Output/Improved Method Output/Average/";
 
 // Name of the generated Analysis .csv file.
 // Change as needed.
-const std::string analysisFilename = "AverageCase2.csv";
+const std::string analysisFilename = "ImprovedMethodAnalysis.csv";
 
 // Path to the directory where the analysis file is to be saved.
 // Change as needed.

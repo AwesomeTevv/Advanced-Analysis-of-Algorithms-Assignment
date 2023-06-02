@@ -1,0 +1,3 @@
+python3 AAAgraphGenerator.py 2 'Brute Force Algorithm.csv' 'Improved Method Algorithm.csv' 'Analysis of the Two Algorithms'
+python3 AAAgraphGenerator.py 3 'Best Case.csv' 'Average Case.csv' 'Worst Case.csv' 'Time Complexities of the Improved Algorithm'
+python3 AAAgraphGenerator.py 4 'Brute Force Algorithm.csv' 'Improved Method Algorithm - Best Case.csv' 'Improved Method Algorithm - Average Case.csv' 'Improved Method Algorithm - Worst Case.csv' 'Time Complexity Analysis of the Two Algorithms'
